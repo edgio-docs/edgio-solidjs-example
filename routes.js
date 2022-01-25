@@ -3,19 +3,18 @@
 
 import { Router } from '@layer0/core/router'
 
-export default new Router()
-  .static('dist', ({ cache }) => {
-    cache({
-      edge: {
-        maxAgeSeconds: 60 * 60 * 60 * 365,
-        forcePrivateCaching: true,
-      },
-      browser: {
-        maxAgeSeconds: 0,
-        serviceWorkerSeconds: 60 * 60 * 24,
-      },
-    })
+export default new Router().match('/:path*', ({ cache, serveStatic }) => {
+  cache({
+    edge: {
+      maxAgeSeconds: 60 * 60 * 60 * 365,
+      forcePrivateCaching: true,
+    },
+    browser: {
+      maxAgeSeconds: 0,
+      serviceWorkerSeconds: 60 * 60 * 24,
+    },
   })
-  .fallback(({ appShell }) => {
-    appShell('dist/index.html')
+  serveStatic('dist/:path*', {
+    onNotFound: async () => serveStatic('dist/index.html'),
   })
+})
