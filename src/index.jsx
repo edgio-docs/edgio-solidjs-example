@@ -15,8 +15,6 @@ render(
 )
 
 if (process.env.NODE_ENV === 'production') {
-  install({
-    includeCacheMisses: true
-  })
+  install()
   installDevtools()
 }

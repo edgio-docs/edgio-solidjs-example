@@ -4,9 +4,9 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "layer0:dev": "layer0 dev",
-    "layer0:build": "layer0 build",
-    "layer0:deploy": "layer0 deploy",
+    "layer0:dev": "0 dev",
+    "layer0:build": "0 build",
+    "layer0:deploy": "0 deploy",
     "format": "prettier --write '**/*' --ignore-unknown",
     "injectManifest": "npx workbox-cli injectManifest"
   },
