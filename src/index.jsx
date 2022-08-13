@@ -1,7 +1,7 @@
 import './index.css'
 import App from './App'
 import { render } from 'solid-js/web'
-import { Router } from 'solid-app-router'
+import { Router } from '@solidjs/router'
 import install from '@layer0/prefetch/window/install'
 import installDevtools from '@layer0/devtools/install'
 

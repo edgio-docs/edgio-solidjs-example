@@ -1,7 +1,7 @@
-import { Prefetcher } from '@layer0/prefetch/sw'
 import { skipWaiting, clientsClaim } from 'workbox-core'
-import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching'
+import { prefetch, Prefetcher } from '@layer0/prefetch/sw'
 import DeepFetchPlugin from '@layer0/prefetch/sw/DeepFetchPlugin'
+import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching'
 
 cleanupOutdatedCaches()
 skipWaiting()
@@ -33,18 +33,14 @@ new Prefetcher({
 
 function deepFetchJS({ $el, el, $ }) {
   var urlTemplate = $(el).attr('src')
-  console.log($(el), urlTemplate)
   if (urlTemplate) {
-    console.log(`\n[][][][]\nPrefetching JS: ${urlTemplate}\n[][][][]\n`)
     prefetch(urlTemplate, 'script')
   }
 }
 
 function deepFetchCSS({ $el, el, $ }) {
   var urlTemplate = $(el).attr('href')
-  console.log($(el), urlTemplate)
   if (urlTemplate) {
-    console.log(`\n[][][][]\nPrefetching CSS: ${urlTemplate}\n[][][][]\n`)
     prefetch(urlTemplate, 'style')
   }
 }
