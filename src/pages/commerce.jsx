@@ -39,7 +39,7 @@ const Commerce = ({}) => {
                     prices: { price: { value: '', currencyCode: '' } },
                   }))
                   .map((i) => (
-                    <ProductPreview key={i.path} {...i} />
+                    <ProductPreview key={i.path} loading={true} {...i} />
                   ))}
               </div>
             </div>
