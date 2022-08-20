@@ -30,7 +30,7 @@ const Product = ({}) => {
         </div>
         <div className="flex w-full flex-col items-start px-10 lg:w-1/2">
           <h1 className="mt-10 text-3xl font-bold text-white lg:mt-0">{!data.loading && data().name}</h1>
-          <h2 dangerouslySetInnerHTML={{ __html: !data.loading && data().description }} className="text-md mt-5 font-light text-[#FFFFFF75]"></h2>
+          {!data.loading && <h2 innerHTML={data().description} className="text-md mt-5 font-light text-[#FFFFFF75]"></h2>}
           <div className="mt-10 flex w-full flex-row justify-between">
             <div className="flex flex-row items-center space-x-1">
               <Icon path={starSolid} className="h-[20px] w-[20px] text-[#FFFFFF75]" />
