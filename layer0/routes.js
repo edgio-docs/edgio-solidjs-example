@@ -21,18 +21,22 @@ router.match('/l0-api/:path*', API_CACHE_HANDLER)
 // Image caching
 router.match('/l0-opt', IMAGE_CACHE_HANDLER)
 
-router.match('/', EDGE_CACHE_HANDLER)
-router.match('/about', EDGE_CACHE_HANDLER)
-router.match('/commerce', EDGE_CACHE_HANDLER)
-router.match('/product/:path', EDGE_CACHE_HANDLER)
-
 // Service Worker
 router.match('/service-worker.js', ({ serviceWorker }) => {
   return serviceWorker('dist/service-worker.js')
 })
 
+// Only compiled with 0 build / 0 deploy
 if (isProductionBuild()) {
+  // Cache but not in 0 dev mode
+  router.match('/', EDGE_CACHE_HANDLER)
+  router.match('/about', EDGE_CACHE_HANDLER)
+  router.match('/commerce', EDGE_CACHE_HANDLER)
+  router.match('/product/:path', EDGE_CACHE_HANDLER)
+  router.match('/commerce/:path', EDGE_CACHE_HANDLER)
+  // Serve all the files under dist folder as assets
   router.static('dist')
+  // Serve rest of the routes via index.html
   router.fallback(({ serveStatic }) => {
     serveStatic('dist/index.html')
   })

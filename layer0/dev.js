@@ -4,7 +4,7 @@ const { createDevServer } = require('@layer0/core/dev')
 const appDir = process.cwd()
 
 module.exports = function () {
-  esbuild.buildSync({
+  esbuild.build({
     entryPoints: [`${appDir}/sw/service-worker.js`],
     outfile: `${appDir}/dist/service-worker.js`,
     minify: true,

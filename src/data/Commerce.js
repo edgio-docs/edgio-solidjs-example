@@ -19,7 +19,7 @@ const fetchLeftSideBarItems = async () => {
   return data
 }
 
-export default function CommerceData({ params, location, navigate, data }) {
+export default function CommerceData({ params, location }) {
   const [products] = createResource(
     () => ({ name: params.name, filter: new URLSearchParams(location.search.substring(1)).get('filter') }),
     fetchProducts

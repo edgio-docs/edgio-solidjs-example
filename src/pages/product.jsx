@@ -1,38 +1,36 @@
 import { Icon } from 'solid-heroicons'
 import { relativizeURL } from '../lib/helper'
+import { useRouteData } from '@solidjs/router'
 import { heart } from 'solid-heroicons/outline'
-import { Link, useRouteData } from '@solidjs/router'
 import { star as starSolid } from 'solid-heroicons/solid'
 import { star as starOutline } from 'solid-heroicons/outline'
 
 const Product = ({}) => {
-  const { product: data, relatedProducts } = useRouteData()
+  const { product: data } = useRouteData()
   return (
-    <div className="flex w-full flex-col items-start">
-      <div className="flex w-full flex-col items-start md:flex-row">
-        <div className="relative flex w-full flex-col items-start md:w-[65%]">
-          <div className="absolute z-50 top-0 left-0 flex flex-col items-start">
-            <h3 className="bg-white py-2 px-4 text-2xl font-bold text-black">{!data.loading ? data().name : ''}</h3>
-            <h4 className="bg-white py-2 px-4 text-lg text-black">{`$ ${!data.loading && data().prices.price.value} ${
+    <div className="pb-5 flex w-full flex-col items-center">
+      <div className="flex max-w-6xl flex-col lg:flex-row">
+        <div className="relative flex w-full flex-col items-start lg:w-1/2">
+          <div className="absolute top-0 left-0 z-10 flex flex-col items-start">
+            <h3 className="border border-gray-200 bg-white py-2 px-4 text-2xl font-bold text-black">{!data.loading && data().name}</h3>
+            <h4 className="border border-gray-200 bg-white py-2 px-4 text-lg text-black">{`${!data.loading && data().prices.price.value} ${
               !data.loading && data().prices.price.currencyCode
             }`}</h4>
           </div>
-          <Icon path={heart} className="absolute top-0 right-0 h-[50px] w-[50px] bg-white p-2" />
-          <div className="relative flex w-full flex-col items-center">
-            {!data.loading && <img src={relativizeURL(data().images[0].url)} className="h-auto w-full max-w-[600px] object-contain" />}
-            {data.loading && <div className="h-[600px] w-[600px] bg-white/50 animate-pulse"></div>}
+          <Icon path={heart} className="absolute top-0 right-0 z-10 h-[50px] w-[50px] border border-gray-200 bg-white p-2" />
+          <div className="flex w-full flex-col items-center">
+            <img src={!data.loading && relativizeURL(data().images[0].url)} className="h-auto w-full max-w-[600px]" />
           </div>
           <div className="product-thumbnails mt-5 flex flex-row items-start gap-x-2 overflow-x-scroll">
             {!data.loading &&
-              data().images.map((i) => (
-                <img key={i.url} loading="lazy" src={relativizeURL(i.url)} className="h-[250px] w-auto cursor-pointer object-cover hover:bg-white" />
+              data().images.map((i, ind) => (
+                <img key={i.url} loading="lazy" src={relativizeURL(i.url)} className="h-[250px] w-auto hover:bg-white" />
               ))}
-            {data.loading && <div className="h-[250px] w-[250px] bg-white/50 animate-pulse" />}
           </div>
         </div>
-        <div className="flex w-full flex-col items-start px-10 md:w-[35%]">
-          <h1 className="mt-10 text-3xl font-bold text-white md:mt-0">{!data.loading && data().name}</h1>
-          {!data.loading && <h2 innerHTML={data().description} className="text-md mt-5 font-light text-[#FFFFFF75]"></h2>}
+        <div className="flex w-full flex-col items-start px-10 lg:w-1/2">
+          <h1 className="mt-10 text-3xl font-bold text-white lg:mt-0">{!data.loading && data().name}</h1>
+          <h2 dangerouslySetInnerHTML={{ __html: !data.loading && data().description }} className="text-md mt-5 font-light text-[#FFFFFF75]"></h2>
           <div className="mt-10 flex w-full flex-row justify-between">
             <div className="flex flex-row items-center space-x-1">
               <Icon path={starSolid} className="h-[20px] w-[20px] text-[#FFFFFF75]" />
@@ -55,25 +53,6 @@ const Product = ({}) => {
           <div className="mt-5 h-[1px] w-full bg-[#FFFFFF30]"></div>
         </div>
       </div>
-      <div className="mt-10 h-[1px] w-full bg-gray-300"></div>
-      {!relatedProducts.loading && relatedProducts().length && (
-        <div className="relative mt-10 flex w-full flex-col">
-          <h1 className="px-5 text-2xl font-bold text-[#FFFFFF75]">Related Products</h1>
-          <div className="product-thumbnails mt-5 flex flex-row items-start gap-x-2 overflow-x-scroll">
-            {relatedProducts().map((i) => (
-              <Link key={i.images[0].url} href={`/product${i.path}`}>
-                <img
-                  loading="lazy"
-                  key={i.images[0].url}
-                  src={relativizeURL(i.images[0].url)}
-                  className="h-[250px] w-auto cursor-pointer object-cover hover:bg-white"
-                />
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-      <div className="mt-10 h-[1px] w-full bg-gray-300"></div>
     </div>
   )
 }

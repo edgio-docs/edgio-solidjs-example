@@ -6,14 +6,7 @@ const fetchProduct = async (name) => {
   return data
 }
 
-const fetchAllProducts = async (name) => {
-  let resp = await fetch(`/l0-api/products/all`)
-  let data = await resp.json()
-  return data
-}
-
-export default function ProductData({ params, location, navigate, data }) {
+export default function ProductData({ params }) {
   const [product] = createResource(() => params.name, fetchProduct)
-  const [relatedProducts] = createResource(() => params.name, fetchAllProducts)
-  return { product, relatedProducts }
+  return { product }
 }
