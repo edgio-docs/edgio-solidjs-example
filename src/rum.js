@@ -1,12 +1,12 @@
-import Router from '@layer0/rum/Router.js'
-import Metrics from '@layer0/rum/Metrics.js'
+import Router from '@edgio/rum/Router.js'
+import Metrics from '@edgio/rum/Metrics.js'
 
 // Implementing Real Time User Monitoring (Core Web Vitals)
-// https://docs.layer0.co/guides/core_web_vitals#npm-or-yarn
-export default function Layer0RUM(token) {
+// https://docs.edgio.co/guides/core_web_vitals#npm-or-yarn
+export default function EdgioRUM(token) {
   new Metrics({
-    // Set this TOKEN as an environment variable at Layer0 Console
-    // More on creating env variables: https://docs.layer0.co/guides/environments#creating-environment-variables
+    // Set this TOKEN as an environment variable at Edgio Console
+    // More on creating env variables: https://docs.edgio.co/guides/environments#creating-environment-variables
     token: token,
     router: new Router()
       .match('/', ({ setPageLabel }) => setPageLabel('home'))

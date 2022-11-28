@@ -1,6 +1,6 @@
 import { skipWaiting, clientsClaim } from 'workbox-core'
-import { prefetch, Prefetcher } from '@layer0/prefetch/sw'
-import DeepFetchPlugin from '@layer0/prefetch/sw/DeepFetchPlugin'
+import { prefetch, Prefetcher } from '@edgio/prefetch/sw'
+import DeepFetchPlugin from '@edgio/prefetch/sw/DeepFetchPlugin'
 import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching'
 
 cleanupOutdatedCaches()

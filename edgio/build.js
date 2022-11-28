@@ -1,6 +1,6 @@
 const esbuild = require('esbuild')
 const { exit } = require('process')
-const { DeploymentBuilder } = require('@layer0/core/deploy')
+const { DeploymentBuilder } = require('@edgio/core/deploy')
 
 const appDir = process.cwd()
 const builder = new DeploymentBuilder(appDir)
