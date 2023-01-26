@@ -1,0 +1,3 @@
+node_modules/
+# edgio generated build directory
+.edgio
